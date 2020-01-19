@@ -32,6 +32,8 @@ import it.cnr.istc.stlab.lgu.commons.iterations.ProgressCounter;
  * A WalkGenerator derived from RDF2Vec
  * https://datalab.rwth-aachen.de/embedding/RDF2Vec/
  * 
+ * @author lgu
+ *
  */
 public class WalkGenerator {
 
@@ -82,13 +84,11 @@ public class WalkGenerator {
 			logger.info(String.format("\n\n%s\n\n", QueryFactory.create(q).toString(Syntax.syntaxSPARQL_11)));
 			logger.info("\n\n");
 		}
-		
-		logger.info(String.format("Executing query for selecting entities \n\n\n\n %s \n\n\n",entitySelectorQuery));
 
 		FileOutputStream fos = new FileOutputStream(new File(fileOut));
 		Set<String> entities = selectEntities(d, entitySelectorQuery);
 
-		logger.info(String.format("Number of entities %d", entities.size()));
+		logger.info(String.format("Number of entities %s", entities.size()));
 		ProgressCounter pc = new ProgressCounter(entities.size());
 		for (String e : entities) {
 			if (!createAVirtualDocumentForEachEntity) {
@@ -321,24 +321,25 @@ public class WalkGenerator {
 		this.createAVirtualDocumentForEachEntity = createAVirtualDocumentForEachEntity;
 	}
 
-	public static void writeEntityListFromQuery(Dataset dataset, String query, String varName, String fileOut)
-			throws IOException {
-
-		FileOutputStream fos = new FileOutputStream(new File(fileOut));
-
-		dataset.begin(ReadWrite.READ);
-
-		QueryExecution qexec = QueryExecutionFactory.create(QueryFactory.create(query), dataset);
-		ResultSet rs = qexec.execSelect();
-		while (rs.hasNext()) {
-			QuerySolution qs = rs.next();
-			fos.write((qs.get(varName).asResource().getURI() + "\n").getBytes());
-		}
-
-		fos.close();
-
-		dataset.commit();
-		dataset.end();
-	}
+//	public static void main(String[] args) throws IOException {
+////		WalkGenerator wg = new WalkGenerator();
+////		wg.setQueryWalks(QueryWalks.RDF2Vec_NO_PREDICATES);
+////
+////		Map<String, String> prefixes = new HashMap<>();
+////		prefixes.put("fnschema", "https://w3id.org/framester/framenet/tbox/");
+////		prefixes.put("owl", "http://www.w3.org/2002/07/owl#");
+////		prefixes.put("lu", "https://w3id.org/framester/framenet/abox/lu/");
+////		prefixes.put("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
+////		prefixes.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+////		prefixes.put("frame", "https://w3id.org/framester/framenet/abox/frame/");
+////		prefixes.put("fe", "https://w3id.org/framester/framenet/abox/fe/");
+////
+////		wg.setPrefixMap(prefixes);
+////
+////		wg.generateWalks("/Users/lgu/Desktop/fn17", "/Users/lgu/Desktop/fn17_walks");
+//
+//		System.out.println(QueryFactory.create(generateQueryRDF2VecIngoing(2, 200)).toString(Syntax.syntaxSPARQL_11));
+//
+//	}
 
 }
