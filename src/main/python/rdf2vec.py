@@ -60,6 +60,7 @@ if __name__ == '__main__':
     
     threshold = args.threshold
     
+    
     load = args.load
     
     #print(filepath+" "+filepath_model+" "+filepath_entitylist+" "+filepath_out+" "+str(dimensionality)+" "+str(load))
@@ -119,4 +120,5 @@ if __name__ == '__main__':
                 #print (f"{entityList[i]}\t{entityList[I[lims[i]:lims[i + 1]][ii]]}\t{D[lims[i]:lims[i + 1]][ii]}")
         
     fp_out.close()
+    logging.info("RDF2Vec completed")
         

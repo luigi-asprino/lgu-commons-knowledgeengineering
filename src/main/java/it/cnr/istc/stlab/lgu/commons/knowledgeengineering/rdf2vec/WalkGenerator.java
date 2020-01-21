@@ -57,7 +57,7 @@ public class WalkGenerator {
 		generateWalks(d, fileOut);
 	}
 
-	public void generateWalks(Dataset d, String fileOut) throws IOException {
+	public Set<String> generateWalks(Dataset d, String fileOut) throws IOException {
 
 		List<String> queries = new ArrayList<>();
 
@@ -134,6 +134,8 @@ public class WalkGenerator {
 			pc.increase();
 		}
 		fos.close();
+		
+		return entities;
 	}
 
 	private static Set<String> selectEntities(Dataset d, String baseQuery) {
