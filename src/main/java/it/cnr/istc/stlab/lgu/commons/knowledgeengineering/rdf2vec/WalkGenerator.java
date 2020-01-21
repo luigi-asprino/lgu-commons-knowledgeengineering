@@ -320,6 +320,26 @@ public class WalkGenerator {
 	public void setCreateAVirtualDocumentForEachEntity(boolean createAVirtualDocumentForEachEntity) {
 		this.createAVirtualDocumentForEachEntity = createAVirtualDocumentForEachEntity;
 	}
+	
+	public static void writeEntityListFromQuery(Dataset dataset, String query, String varName, String fileOut)
+			throws IOException {
+
+		FileOutputStream fos = new FileOutputStream(new File(fileOut));
+
+		dataset.begin(ReadWrite.READ);
+
+		QueryExecution qexec = QueryExecutionFactory.create(QueryFactory.create(query), dataset);
+		ResultSet rs = qexec.execSelect();
+		while (rs.hasNext()) {
+			QuerySolution qs = rs.next();
+			fos.write((qs.get(varName).asResource().getURI() + "\n").getBytes());
+		}
+
+		fos.close();
+
+		dataset.commit();
+		dataset.end();
+	}
 
 
 
