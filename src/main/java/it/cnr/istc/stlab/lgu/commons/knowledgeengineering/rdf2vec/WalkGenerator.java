@@ -321,25 +321,6 @@ public class WalkGenerator {
 		this.createAVirtualDocumentForEachEntity = createAVirtualDocumentForEachEntity;
 	}
 
-//	public static void main(String[] args) throws IOException {
-////		WalkGenerator wg = new WalkGenerator();
-////		wg.setQueryWalks(QueryWalks.RDF2Vec_NO_PREDICATES);
-////
-////		Map<String, String> prefixes = new HashMap<>();
-////		prefixes.put("fnschema", "https://w3id.org/framester/framenet/tbox/");
-////		prefixes.put("owl", "http://www.w3.org/2002/07/owl#");
-////		prefixes.put("lu", "https://w3id.org/framester/framenet/abox/lu/");
-////		prefixes.put("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
-////		prefixes.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-////		prefixes.put("frame", "https://w3id.org/framester/framenet/abox/frame/");
-////		prefixes.put("fe", "https://w3id.org/framester/framenet/abox/fe/");
-////
-////		wg.setPrefixMap(prefixes);
-////
-////		wg.generateWalks("/Users/lgu/Desktop/fn17", "/Users/lgu/Desktop/fn17_walks");
-//
-//		System.out.println(QueryFactory.create(generateQueryRDF2VecIngoing(2, 200)).toString(Syntax.syntaxSPARQL_11));
-//
-//	}
+
 
 }
